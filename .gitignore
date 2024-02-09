@@ -1,4 +1,4 @@
-amazon_reviews_us_Office_Products_v1_00.tsv
+*.tsv
 punkt/
 *.pt
 NLP-HW2-Old.ipynb
