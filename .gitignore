@@ -7,3 +7,6 @@ junk/
 *pdf
 hmm.json
 train_vocab.txt
+submission/
+*.txt
+submission.zip
