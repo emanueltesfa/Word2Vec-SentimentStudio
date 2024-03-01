@@ -10,3 +10,5 @@ train_vocab.txt
 submission/
 *.txt
 submission.zip
+.DS_Store
+data/lstm-data/
