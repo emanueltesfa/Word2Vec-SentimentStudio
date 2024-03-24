@@ -11,6 +11,9 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 from functools import partial
 
+import warnings 
+warnings.filterwarnings('ignore')
+
 ###  C:/Users/amant/anaconda3/envs/pytorch_dl/python.exe ./main.py
 def main():
 
@@ -21,13 +24,6 @@ def main():
     word_vocab, tag_vocab = build_vocab(data_files)
     input_dim = len(word_vocab)  
     output_dim = len(tag_vocab)
-
-    # dataset_dict = {
-    #     'train': IndexedNERDataset('../../data/lstm-data/train', word_vocab, tag_vocab),
-    #     'dev': IndexedNERDataset('../../data/lstm-data/dev', word_vocab, tag_vocab)
-    # }
-
-    # print('input dim: ', input_dim, 'output dim: ', output_dim)
 
     regular_class_weight, inv_class_weight = get_class_weights(data_files, tag_vocab)
     regular_class_weight, inv_class_weight = regular_class_weight.to(device),  inv_class_weight.to(device)
@@ -44,15 +40,8 @@ def main():
         'dev': DataLoader(IndexedNERDataset('../../data/lstm-data/dev', word_vocab, tag_vocab), batch_size = 16, shuffle = False, collate_fn=lambda batch: pad_collate_with_vocab(batch)),
         # 'test': DataLoader(test_dataset, batch_size=32, shuffle=False, collate_fn=pad_collate)
     }
-
-
-    # dataloaders = {
-    #     'train': DataLoader(training_dataset, batch_size=32, shuffle=True, collate_fn=lambda batch: pad_collate_with_vocab(batch)),
-    #     'val': DataLoader(validation_dataset, batch_size=32, shuffle=False, collate_fn=lambda batch: pad_collate_with_vocab(batch)),
-    # }
     
-    
-    # train_model(model, dataloaders, optimizer, criterion, device, ckpt_name = '../ckpts/custom_BiLSTM.pth', patience = 30, num_epochs = 5) # MODEL SAVED AT '/NER-Tagging/notebooks/ckpts/custom_BiLSTM.pth'
+    train_model(model, dataloaders, optimizer, criterion, device, ckpt_name = '../ckpts/custom_BiLSTM.pth', patience = 30, num_epochs = 100) # MODEL SAVED AT '/NER-Tagging/notebooks/ckpts/custom_BiLSTM.pth'
 
 
     ### GLOVE Model Training
@@ -69,7 +58,7 @@ def main():
     glove_criterion = nn.CrossEntropyLoss(weight = inv_class_weight, ignore_index = tag_vocab.get('<PAD>', -1))  
     glove_optimizer = optim.SGD(glove_model.parameters(), lr = 0.05, momentum = 0.9, weight_decay = 0.0001)
 
-    train_model(glove_model, glove_dataloaders, glove_optimizer, glove_criterion, device, ckpt_name = '../ckpts/glove_BiLSTM.pth', patience = 50, num_epochs = 1)
+    train_model(glove_model, glove_dataloaders, glove_optimizer, glove_criterion, device, ckpt_name = '../ckpts/glove_BiLSTM.pth', patience = 50, num_epochs = 150)
 
 
     ### Make Predicition 

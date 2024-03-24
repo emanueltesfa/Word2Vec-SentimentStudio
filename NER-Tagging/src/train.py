@@ -54,9 +54,9 @@ def train_model(model: nn.Module, dataloaders: dict[str, DataLoader], optimizer:
         val_loss, val_acc, val_f1_mac, val_f1_mic, val_f1_weighted = evaluate_model(model, dataloaders['dev'], criterion, device)
 
         if epoch % 5 == 0: 
-            print(f'Epoch {epoch+1}:')
-            print(f'Train - Loss: {train_loss:.4f}, Acc: {train_acc:.4f},  F1Mac: {train_f1_mac:.4f}')
-            print(f'Val - Loss: {val_loss:.4f}, Acc: {val_acc:.4f}, F1Mac: {val_f1_mac:.4f}')
+            print(f' Epoch {epoch+1}:')
+            print(f'  Train - Loss: {train_loss:.4f}, Acc: {train_acc:.4f},  F1Mac: {train_f1_mac:.4f}')
+            print(f'  Val - Loss: {val_loss:.4f}, Acc: {val_acc:.4f}, F1Mac: {val_f1_mac:.4f}')
 
             
         # Early stopping based on validation F1 score
