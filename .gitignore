@@ -12,3 +12,6 @@ submission/
 submission.zip
 .DS_Store
 data/lstm-data/
+NER-Tagging/src/__pycache__/*
+NER-Tagging/best_checkpoints/*
+NER-Tagging/ckpts/
