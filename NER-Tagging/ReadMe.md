@@ -64,3 +64,6 @@ Questions:
                 MISC: precision:  78.51%; recall:  81.24%; FB1:  79.85  954
                 ORG: precision:  79.97%; recall:  84.27%; FB1:  82.06  1413
               PER: precision:  87.81%; recall:  92.29%; FB1:  89.99  1936
+
+Command to run python code: 
+    C:/Users/amant/anaconda3/envs/pytorch_dl/python.exe ./main.py
